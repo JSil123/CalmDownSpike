@@ -56,21 +56,25 @@ if __name__ == "__main__":
 
     db = next(get_db())
     try:
-        create_user(db, "spike_owner", "owner@example.com", "securepassword123")
-        user = db.query(User).filter_by(username="spike_owner").first()
-        create_device(db, user.id, "Spike's Blanket", "blanket", "active")
+        username = input("Enter username: ")
+        email = input("Enter email: ")
+        password = input("Enter password: ")
+
+        create_user(db, username, email, password)
+        user = db.query(User).filter_by(username=username).first()
 
         if user:
-            create_device(db, user.id, "Spike's Blanket", "blanket", "active")
-            logger.info("Device 'Spike's Blanket' created successfully.")
+            device_name = input("Enter device name: ")
+            device_type = input("Enter device type: ")
+            device_status = input("Enter device status: ")
+
+            create_device(db, user.id, device_name, device_type, device_status)
+            logger.info(f"Device '{device_name}' created successfully.")
         else:
-            logger.error("User 'spike_owner' not found after creation.")
+            logger.error(f"User '{username}' not found after creation.")
 
     except Exception as e:
         logger.exception("An error occurred while setting up the user and device.")
 
     finally:
         db.close()
-
-if __name__ == "__main__":
-    main()
