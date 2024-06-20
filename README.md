@@ -16,4 +16,12 @@ CalmDownSpike is an innovative interactive dog blanket designed to offer comfort
 - LED lights for calming
 - Customizable voice activation
 - Remote management through a mobile app
-- Interactive vibrating toy with sound activation
+- User account management
+- Customizable blanket settings (sound, temperature, light, vibration)
+- Automated control features
+- Safety measures (monitoring, movement detection)
+
+## Installation
+
+```sh
+pip install -r requirements.txt
