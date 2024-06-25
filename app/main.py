@@ -1,80 +1,42 @@
-import logging
-from logging.handlers import RotatingFileHandler
-from sqlalchemy.exc import SQLAlchemyError
-from database import engine, Base, get_db
-from models import User, Device, Settings, Log
-from validators import validate_username, validate_password, validate_device_name
-from config import config
+from fastapi import FastAPI, Request, Depends, HTTPException
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
+from sqlalchemy.orm import Session
+from app.database import engine, Base, get_db
+from app.models import User
+from app.schemas import UserCreate
+from app.services import user_service
 
-# Set up logging
-logging.basicConfig(level=config.LOGGING_LEVEL)
-handler = RotatingFileHandler('logs/app.log', maxBytes=2000, backupCount=10)
-logger = logging.getLogger(__name__)
-logger.addHandler(handler)
+app = FastAPI()
+templates = Jinja2Templates(directory="frontend/templates")
 
-def create_user(db, username, email, password):
+Base.metadata.create_all(bind=engine)
+
+@app.get("/", response_class=HTMLResponse)
+async def read_root(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request, "title": "Home"})
+
+@app.get("/login", response_class=HTMLResponse)
+async def login_form(request: Request):
+    return templates.TemplateResponse("login.html", {"request": request, "title": "Login"})
+
+@app.get("/register", response_class=HTMLResponse)
+async def register_form(request: Request):
+    return templates.TemplateResponse("register.html", {"request": request, "title": "Register"})
+
+@app.post("/register", response_class=HTMLResponse)
+async def register_user(request: Request, db: Session = Depends(get_db), user_create: UserCreate = Depends()):
     try:
-        validate_username(username)
-        validate_password(password)
-        new_user = User(username=username, email=email, password=password)
-        db.add(new_user)
-        db.commit()
-        db.refresh(new_user)
-        logger.info(f"User created: {username}")
-    except (ValueError, SQLAlchemyError) as e:
-        db.rollback()
-        logger.error(f"Error creating user: {e}")
-        raise
+        user_service.create_user(db, user_create.username, user_create.email, user_create.password)
+        return templates.TemplateResponse("login.html", {"request": request, "title": "Login"})
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
-def create_device(db, user_id, name, type, status):
-    try:
-        validate_device_name(name)
-        new_device = Device(user_id=user_id, name=name, type=type, status=status)
-        db.add(new_device)
-        db.commit()
-        db.refresh(new_device)
-        logger.info(f"Device created: {name}")
-    except (ValueError, SQLAlchemyError) as e:
-        db.rollback()
-        logger.error(f"Error creating device: {e}")
-        raise
-
-def log_event(db, device_id, event):
-    try:
-        new_log = Log(device_id=device_id, event=event, timestamp='now')
-        db.add(new_log)
-        db.commit()
-        db.refresh(new_log)
-        logger.info(f"Event logged for device {device_id}: {event}")
-    except SQLAlchemyError as e:
-        db.rollback()
-        logger.error(f"Error logging event: {e}")
-        raise
+@app.get("/dashboard", response_class=HTMLResponse)
+async def dashboard(request: Request, db: Session = Depends(get_db)):
+    user = db.query(User).filter_by(username="testuser").first()  # Replace with actual user fetching logic
+    return templates.TemplateResponse("dashboard.html", {"request": request, "title": "Dashboard", "user": user})
 
 if __name__ == "__main__":
-    Base.metadata.create_all(bind=engine)
-
-    db = next(get_db())
-    try:
-        username = input("Enter username: ")
-        email = input("Enter email: ")
-        password = input("Enter password: ")
-
-        create_user(db, username, email, password)
-        user = db.query(User).filter_by(username=username).first()
-
-        if user:
-            device_name = input("Enter device name: ")
-            device_type = input("Enter device type: ")
-            device_status = input("Enter device status: ")
-
-            create_device(db, user.id, device_name, device_type, device_status)
-            logger.info(f"Device '{device_name}' created successfully.")
-        else:
-            logger.error(f"User '{username}' not found after creation.")
-
-    except Exception as e:
-        logger.exception("An error occurred while setting up the user and device.")
-
-    finally:
-        db.close()
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)

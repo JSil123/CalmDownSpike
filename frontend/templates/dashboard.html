@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Dashboard</h2>
+<p>Welcome, {{ user.username }}!</p>
+<div class="row">
+    <div class="col-md-6">
+        <h3>Your Devices</h3>
+        <ul>
+            {% for device in user.devices %}
+            <li>{{ device.name }} - {{ device.status }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <h3>Settings</h3>
+        <p>Customize your blanket settings.</p>
+        <!-- Settings form here -->
+    </div>
+</div>
+{% endblock %}
