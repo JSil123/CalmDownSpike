@@ -1,0 +1,66 @@
+
+{
+"connector": {
+    "name": "local",
+    "options": {
+    "pattern": ["**/*.html"]
+    }
+  },
+  "extends": [
+    "development"
+  ],
+  "options": {
+  "patterns": ["**/*.html"]
+},
+"hints": [ {
+  "compat-api/css": "warning",
+  "compat-api/html": "warning",
+  "compat-api/javascript": "warning"
+},
+  "accessibility",
+  "apple-touch-icons",
+  "content-type",
+  "disown-opener",
+  "highest-available-document-mode",
+  "html-checker",
+  "http-cache",
+  "manifest-app-name",
+  "manifest-file-extension",
+  "manifest-is-valid",
+  "meta-charset-utf-8",
+  "meta-theme-color",
+  "meta-viewport",
+  "no-bom",
+  "no-disallowed-headers",
+  "no-friendly-error-pages",
+  "no-html-only-headers",
+  "no-http-redirects",
+  "no-protocol-relative-urls",
+  "no-p3p",
+  "no-vulnerable-javascript-libraries",
+  "performance-budget",
+  "ssllabs",
+  "strict-transport-security",
+  "x-content-type-options",
+  "x-frame-options",
+  "x-ua-compatible",
+  "x-xss-protection"
+],
+"parsers": ["css", "html", "javascript"],
+"formatters": ["summary", "html"],
+"browserslist": [
+  "> 1%",
+  "last 2 versions",
+  "IE 11"
+],
+"ignoredUrls": [
+  {
+    "domain": "www.google-analytics.com",
+    "hints": ["*"]
+  },
+  {
+    "domain": "cdn.jsdelivr.net",
+    "hints": ["*"]
+  }
+]
+}
