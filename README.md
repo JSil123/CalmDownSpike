@@ -1,4 +1,6 @@
-![Logo](https://github.com/JSil123/CalmDownSpike/blob ce8983b800f7e6fce15ffeb0604dc492a927027c/CSS/images/logo.png)
+![Logo] <p align="center">
+<img src = "CSS/images/logo.png" alt="CalmDownSpike Logo" width="200"/>
+</p>
 
 # CalmDownSpike
 
