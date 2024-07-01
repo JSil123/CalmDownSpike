@@ -1,5 +1,5 @@
-<p align="center">
-<img src = "CSS/images/logo.png" alt="CalmDownSpike Logo" width="100"/>
+<p align="right">
+<img src = "CSS/images/logo.png" alt="CalmDownSpike Logo" width="150"/>
 </p>
 
 # CalmDownSpike
