@@ -1,3 +1,5 @@
+![Logo](https://github.com/JSil123/CalmDownSpike/blob ce8983b800f7e6fce15ffeb0604dc492a927027c/CSS/images/logo.png)
+
 # CalmDownSpike
 
 CalmDownSpike is an innovative interactive dog blanket designed to offer comfort and alleviate anxiety in dogs. It aims to provide dog owners convenience and peace of mind. CalmDownSpike is designed for pet owners who want practical solutions to help their dogs manage anxiety and stress. It includes many features, such as configurable settings, remote management through a mobile app, and revolutionary technology that creates a soothing dog environment. CalmDownSpike strives to enhance the welfare and overall quality of life for pets and their families by catering to the requirements of both dogs and their owners.
@@ -20,8 +22,3 @@ CalmDownSpike is an innovative interactive dog blanket designed to offer comfort
 - Customizable blanket settings (sound, temperature, light, vibration)
 - Automated control features
 - Safety measures (monitoring, movement detection)
-
-## Installation
-
-```sh
-pip install -r requirements.txt
