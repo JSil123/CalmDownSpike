@@ -1,13 +1,47 @@
 {
     "python.analysis.extraPaths": [
-        "./app"
+        "./app",
+        "./backend",
+        "./showCompletionItemsFromUnimportedNamespaces",
+        "./frontend"
     ],
     "cSpell.words": [
+        "absolutepath",
+        "asgiref",
+        "assertstate",
+        "autoflush",
+        "backref",
+        "basenames",
+        "bdist",
+        "cabc",
+        "calmdownspike",
+        "compat",
+        "DBAPI",
+        "dotenv",
         "fastapi",
+        "fnpats",
+        "getini",
+        "initialpaths",
+        "jsdelivr",
+        "jsonify",
+        "noreferrer",
+        "poolclass",
+        "postgre",
         "psycopg",
+        "Purelib",
+        "pydantic",
+        "pyfile",
+        "sansio",
         "sessionmaker",
         "sqlalchemy",
+        "ssllabs",
         "supersecretkey",
-        "uvicorn"
-    ]
+        "templating",
+        "usermodel",
+        "uvicorn",
+        "werkzeug",
+        "wrongpassword"
+    ],
+    "C_Cpp.errorSquiggles": "disabled",
+    "ansible.python.interpreterPath": "c:\\CalmDownSpike\\venv\\Scripts\\python.exe"
 }
