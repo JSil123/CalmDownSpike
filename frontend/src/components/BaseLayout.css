@@ -1,0 +1,26 @@
+/* src/components/BaseLayout.css */
+
+.navbar {
+    background-color: #f8f9fa;
+    padding: 1rem;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.navbar-nav {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.container {
+    margin-top: 2rem;
+}
