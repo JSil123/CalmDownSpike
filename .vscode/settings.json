@@ -22,6 +22,7 @@
         "fnpats",
         "getini",
         "initialpaths",
+        "inituser",
         "jsdelivr",
         "jsonify",
         "noreferrer",

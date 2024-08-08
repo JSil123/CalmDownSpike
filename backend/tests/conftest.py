@@ -1,6 +1,6 @@
 import pytest
 from app import create_app, db
-from app.models import User
+from models import User
 
 @pytest.fixture(scope='module')
 def test_client():
